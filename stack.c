@@ -1,4 +1,4 @@
-j#include "stack.h"
+#include "stack.h"
 #include <stdlib.h>
 
 t_stack *init_stack(void) {
