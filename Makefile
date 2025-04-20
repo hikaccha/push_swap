@@ -1,4 +1,6 @@
-SRC = 
+SRC = main.c\
+	stack.c\
+	stack.h\
 NAME = push_swap
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

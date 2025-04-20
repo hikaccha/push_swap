@@ -1,6 +1,9 @@
 #include "stack.h"
-#include <stdio.h>
-#include <stdlib.h>
+
+char *error_message(void) {
+    char *error_message = "Error\n";
+    return error_message;
+}
 
 void parse_input(t_stack *stack, int argc, char **argv) {
     for (int i = 1; i < argc; i++) {
@@ -10,6 +13,9 @@ void parse_input(t_stack *stack, int argc, char **argv) {
 
 void sort_stack(t_stack *a, t_stack *b) {
     // ソートアルゴリズムの実装
+    while(a->top != NULL) {
+        
+    }
 }
 
 int main(int argc, char **argv) {

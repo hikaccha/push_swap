@@ -1,5 +1,4 @@
 #include "stack.h"
-#include <stdlib.h>
 
 t_stack *init_stack(void) {
     t_stack *stack = (t_stack *)malloc(sizeof(t_stack));
