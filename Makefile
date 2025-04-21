@@ -1,22 +1,40 @@
-SRC = main.c\
-	stack.c\
-	stack.h\
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#              #
+#    Updated: 2025/04/21 12:15:12 by hichikaw         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-OBJC = $(SRCS:.c=.o)
+SRC = main.c \
+	stack_utils.c \
+	operations.c \
+	utils.c \
+	validation.c \
+	sort_chunks.c \
+	sort.c
+OBJS = $(SRC:.c=.o)
 RM = rm -f
-AR = ar -rc
 
 all: $(NAME)
 
-$(NAME): $(OBJC)
-	$(AR) $(NAME) $(OBJC)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-clea:
-	$(RM) $(OBJC)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-fclean:
+clean:
+	$(RM) $(OBJS)
+
+fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all

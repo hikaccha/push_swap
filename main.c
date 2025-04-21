@@ -1,34 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#             */
+/*   Updated: 2025/04/21 10:46:30 by hichikaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "stack.h"
 
-char *error_message(void) {
-    char *error_message = "Error\n";
-    return error_message;
+static void	cleanup_and_exit(t_stack *a, t_stack *b, int status)
+{
+	free_stack(a);
+	free_stack(b);
+	exit(status);
 }
 
-void parse_input(t_stack *stack, int argc, char **argv) {
-    for (int i = 1; i < argc; i++) {
-        push(stack, atoi(argv[i]));
-    }
+static void	handle_input_validation(t_stack *a, t_stack *b, int argc, char **argv)
+{
+	if (!validate_input(argc, argv, a))
+	{
+		printf("%s", error_message());
+		cleanup_and_exit(a, b, 1);
+	}
+	if (is_sorted(a))
+		cleanup_and_exit(a, b, 0);
 }
 
-void sort_stack(t_stack *a, t_stack *b) {
-    // ソートアルゴリズムの実装
-    while(a->top != NULL) {
-        
-    }
-}
+int	main(int argc, char **argv)
+{
+	t_stack	*a;
+	t_stack	*b;
 
-int main(int argc, char **argv) {
-    t_stack *a = init_stack();
-    t_stack *b = init_stack();
-
-    parse_input(a, argc, argv);
-    sort_stack(a, b);
-
-    // 操作の出力
-
-    // メモリ解放
-    free(a);
-    free(b);
-    return 0;
+	a = init_stack();
+	b = init_stack();
+	if (!a || !b)
+	{
+		printf("%s", error_message());
+		if (a)
+			free_stack(a);
+		if (b)
+			free_stack(b);
+		return (1);
+	}
+	if (argc > 1)
+	{
+		handle_input_validation(a, b, argc, argv);
+		sort_stack(a, b);
+	}
+	free_stack(a);
+	free_stack(b);
+	return (0);
 }
