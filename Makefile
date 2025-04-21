@@ -6,7 +6,7 @@
 #    By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#              #
-#    Updated: 2025/04/21 12:15:12 by hichikaw         ###   ########.fr        #
+#    Updated: 2025/04/21 14:53:08 by hichikaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,16 @@ NAME = push_swap
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 SRC = main.c \
-	stack_utils.c \
-	operations.c \
-	utils.c \
+	stack_basic.c \
+	stack_operations.c \
+	operations_swap_push.c \
+	operations_rotate.c \
+	operations_combined.c \
+	utils_stack.c \
+	utils_values.c \
 	validation.c \
 	sort_chunks.c \
+	sort_small.c \
 	sort.c
 OBJS = $(SRC:.c=.o)
 RM = rm -f

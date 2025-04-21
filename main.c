@@ -6,7 +6,7 @@
 /*   By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#             */
-/*   Updated: 2025/04/21 10:46:30 by hichikaw         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:24:37 by hichikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	cleanup_and_exit(t_stack *a, t_stack *b, int status)
 	exit(status);
 }
 
-static void	handle_input_validation(t_stack *a, t_stack *b, int argc, char **argv)
+static void	handle_input_validation(t_stack *a, t_stack *b,
+	int argc, char **argv)
 {
 	if (!validate_input(argc, argv, a))
 	{

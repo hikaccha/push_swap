@@ -6,7 +6,7 @@
 /*   By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#             */
-/*   Updated: 2025/04/21 12:30:13 by hichikaw         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:54:05 by hichikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_within_int_range(char *str)
 	while (str[i])
 	{
 		num = num * 10 + (str[i] - '0');
-		if ((sign == 1 && num > INT_MAX) || (sign == -1 && -num < INT_MIN))
+		if ((sign == 1 && num > INT_MAX) || (sign == -1 && num * -1 < INT_MIN))
 			return (0);
 		i++;
 	}
@@ -70,11 +70,28 @@ int	has_duplicates(int *values, int count, int value)
 	return (0);
 }
 
-// 入力を昇順にスタックに積む処理
-int	validate_input(int argc, char **argv, t_stack *stack)
+int	validate_values(char **argv, int *values, int count)
 {
 	int	i;
 	int	value;
+
+	i = 0;
+	while (i < count)
+	{
+		if (!is_integer(argv[i + 1]) || !is_within_int_range(argv[i + 1]))
+			return (0);
+		value = atoi(argv[i + 1]);
+		if (has_duplicates(values, i, value))
+			return (0);
+		values[i] = value;
+		i++;
+	}
+	return (1);
+}
+
+int	validate_input(int argc, char **argv, t_stack *stack)
+{
+	int	i;
 	int	*values;
 	int	count;
 
@@ -84,25 +101,11 @@ int	validate_input(int argc, char **argv, t_stack *stack)
 	values = (int *)malloc(sizeof(int) * count);
 	if (!values)
 		return (0);
-	// 入力値を検証して配列に保存
-	i = 0;
-	while (i < count)
+	if (!validate_values(argv, values, count))
 	{
-		if (!is_integer(argv[i + 1]) || !is_within_int_range(argv[i + 1]))
-		{
-			free(values);
-			return (0);
-		}
-		value = atoi(argv[i + 1]);
-		if (has_duplicates(values, i, value))
-		{
-			free(values);
-			return (0);
-		}
-		values[i] = value;
-		i++;
+		free(values);
+		return (0);
 	}
-	// 逆順からスタックにプッシュ（配列の最後からプッシュすることで順序を保持）
 	i = count - 1;
 	while (i >= 0)
 	{
@@ -111,4 +114,4 @@ int	validate_input(int argc, char **argv, t_stack *stack)
 	}
 	free(values);
 	return (1);
-} 
+}
