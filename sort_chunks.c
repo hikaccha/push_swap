@@ -6,7 +6,7 @@
 /*   By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#             */
-/*   Updated: 2025/04/21 14:17:26 by hichikaw         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:24:53 by hichikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,41 @@ void	setup_chunks(t_stack *a, int size, int *chunk_count, int *chunk_size)
 
 void	move_chunk_to_b(t_stack *a, t_stack *b, int chunk_min, int chunk_max)
 {
-	int	i;
+	int	size;
+	int	rotations;
 
-	i = get_stack_size(a);
-	while (i > 0 && !is_sorted(a))
+	size = get_stack_size(a);
+	rotations = 0;
+	
+	while (rotations < size * 2) // 無限ループ防止
 	{
 		if (a->top->value >= chunk_min && a->top->value <= chunk_max)
+		{
 			pb(a, b);
+			// より効率的な配置: 大きい値は上に保持
+			if (get_stack_size(b) > 1 && b->top->value < b->top->next->value)
+				rb(b);
+		}
 		else
+		{
 			ra(a);
-		i--;
+			rotations++;
+		}
+		
+		// チャンク内の要素がすべて移動されたかチェック
+		t_node *current = a->top;
+		int found = 0;
+		while (current)
+		{
+			if (current->value >= chunk_min && current->value <= chunk_max)
+			{
+				found = 1;
+				break;
+			}
+			current = current->next;
+		}
+		if (!found)
+			break;
 	}
 }
 
