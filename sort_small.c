@@ -6,11 +6,33 @@
 /*   By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#             */
-/*   Updated: 2025/06/01 20:31:43 by hichikaw         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:43:06 by hichikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
+
+static void	sort_three_cases(t_stack *a, int first, int second, int third)
+{
+	if (first < second && second < third)
+		return ;
+	else if (first > second && second < third && first < third)
+		sa(a);
+	else if (first < second && second > third && first < third)
+	{
+		sa(a);
+		ra(a);
+	}
+	else if (first > second && second > third && first > third)
+	{
+		sa(a);
+		rra(a);
+	}
+	else if (first > second && second < third && first > third)
+		ra(a);
+	else if (first < second && second > third && first > third)
+		rra(a);
+}
 
 void	sort_three(t_stack *a)
 {
@@ -28,30 +50,10 @@ void	sort_three(t_stack *a)
 	}
 	if (get_stack_size(a) < 3)
 		return ;
-		
 	first = a->top->value;
 	second = a->top->next->value;
 	third = a->top->next->next->value;
-	
-	// 3つの要素のすべてのケースを明確に処理
-	if (first < second && second < third)
-		return ; // 既にソート済み
-	else if (first > second && second < third && first < third)
-		sa(a); // 2 1 3 -> 1 2 3
-	else if (first < second && second > third && first < third)
-	{
-		sa(a); // 1 3 2 -> 3 1 2
-		ra(a);  // 3 1 2 -> 1 2 3
-	}
-	else if (first > second && second > third && first > third)
-	{
-		sa(a);  // 3 2 1 -> 2 3 1
-		rra(a); // 2 3 1 -> 1 2 3
-	}
-	else if (first > second && second < third && first > third)
-		ra(a); // 3 1 2 -> 1 2 3
-	else if (first < second && second > third && first > third)
-		rra(a); // 2 3 1 -> 1 2 3
+	sort_three_cases(a, first, second, third);
 }
 
 void	move_min_to_b(t_stack *a, t_stack *b, int *size)

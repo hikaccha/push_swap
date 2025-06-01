@@ -6,7 +6,7 @@
 #    By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#              #
-#    Updated: 2025/04/21 14:53:08 by hichikaw         ###   ########.fr        #
+#    Updated: 2025/06/01 21:03:55 by hichikaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,14 @@ SRC = main.c \
 	utils_values.c \
 	validation.c \
 	sort_chunks.c \
+	sort_chunks2.c \
 	sort_small.c \
-	sort.c
+	sort.c \
+	sort_turk.c \
+	sort_turk2.c \
+	sort_turk3.c \
+	sort_turk4.c \
+	sort_turk5.c
 OBJS = $(SRC:.c=.o)
 RM = rm -f
 

@@ -6,7 +6,7 @@
 /*   By: hichikaw <hichikaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:20:24 by hichikaw          #+#    #+#             */
-/*   Updated: 2025/06/01 19:39:17 by hichikaw         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:56:11 by hichikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,17 @@ void	move_chunk_to_b(t_stack *a, t_stack *b, int chunk_min, int chunk_max);
 void	move_max_to_a(t_stack *a, t_stack *b);
 void	sort_chunks(t_stack *a, t_stack *b);
 void	sort_stack(t_stack *a, t_stack *b);
+
+/* Turk Algorithm関数 */
+int		find_cheapest_in_a(t_stack *a, t_stack *b);
+int		find_cheapest_in_b(t_stack *a, t_stack *b);
+int		calculate_cost_a_to_b(t_stack *a, t_stack *b, int pos_a);
+int		calculate_cost_b_to_a(t_stack *a, t_stack *b, int pos_b);
+int		check_chunk_remaining(t_stack *a, int chunk_min, int chunk_max);
+void	move_cheapest_to_b(t_stack *a, t_stack *b);
+void	move_cheapest_to_a(t_stack *a, t_stack *b);
+int		find_position_in_b(t_stack *b, int value);
+int		find_position_in_a(t_stack *a, int value);
+void	turk_sort(t_stack *a, t_stack *b);
 
 #endif
